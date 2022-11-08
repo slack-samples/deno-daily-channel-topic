@@ -14,7 +14,9 @@ const deleteTrigger: SlackFunctionHandler<
 
   console.log(triggerlist.triggers);
 
-  const channelTrigger = triggerlist.triggers.find((i: { inputs: { channel_id: { value: string; }; }; }) => i.inputs?.channel_id?.value == inputs.channel_id);
+  const channelTrigger = triggerlist.triggers.find((
+    i: { inputs: { channel_id: { value: string } } },
+  ) => i.inputs?.channel_id?.value == inputs.channel_id);
   console.log(channelTrigger);
 
   await client.workflows.triggers.delete({

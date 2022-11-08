@@ -31,6 +31,6 @@ export default Manifest({
     "chat:write",
     "chat:write.public",
     "triggers:write",
-    "triggers:read"
+    "triggers:read",
   ],
 });

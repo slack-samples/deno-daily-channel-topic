@@ -41,10 +41,13 @@ ScheduledUpdateTopicWorkflow.addStep(
   },
 );
 
-ScheduledUpdateTopicWorkflow.addStep(Schema.slack.functions.UpdateChannelTopic, {
-  channel_id: ScheduledUpdateTopicWorkflow.inputs.channel_id,
-  topic: generateMessageStep.outputs.message,
-});
+ScheduledUpdateTopicWorkflow.addStep(
+  Schema.slack.functions.UpdateChannelTopic,
+  {
+    channel_id: ScheduledUpdateTopicWorkflow.inputs.channel_id,
+    topic: generateMessageStep.outputs.message,
+  },
+);
 
 ScheduledUpdateTopicWorkflow.addStep(
   Schema.slack.functions.SendMessage,

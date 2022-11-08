@@ -31,22 +31,25 @@ export const DeleteScheduleWorkflow = DefineWorkflow(
   },
 );
 
-const formData = DeleteScheduleWorkflow.addStep(Schema.slack.functions.OpenForm,{
-  title: "Delete Schedule",
-  interactivity: DeleteScheduleWorkflow.inputs.interactivity,
-  submit_label: "Submit",
-  description: "Delete the scheduled topic update for a channel",
-  fields: {
-    required: ["channel_id"],
-    elements: [
-      {
-        name: "channel_id",
-        title: "The Channel to create the schedule for",
-        type: Schema.slack.types.channel_id,
-      },
-    ],
+const formData = DeleteScheduleWorkflow.addStep(
+  Schema.slack.functions.OpenForm,
+  {
+    title: "Delete Schedule",
+    interactivity: DeleteScheduleWorkflow.inputs.interactivity,
+    submit_label: "Submit",
+    description: "Delete the scheduled topic update for a channel",
+    fields: {
+      required: ["channel_id"],
+      elements: [
+        {
+          name: "channel_id",
+          title: "The Channel to create the schedule for",
+          type: Schema.slack.types.channel_id,
+        },
+      ],
+    },
   },
-})
+);
 
 DeleteScheduleWorkflow.addStep(
   DeleteScheduledTrigger,

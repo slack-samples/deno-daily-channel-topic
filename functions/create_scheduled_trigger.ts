@@ -26,8 +26,8 @@ const createTrigger: SlackFunctionHandler<
       start_time: scheduleDate.toUTCString(),
       frequency: {
         type: "daily",
-        repeats_every: 1
-      }
+        repeats_every: 1,
+      },
     },
   });
 

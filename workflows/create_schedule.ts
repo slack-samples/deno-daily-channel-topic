@@ -40,22 +40,25 @@ export const CreateScheduleWorkflow = DefineWorkflow(
   },
 );
 
-const formData = CreateScheduleWorkflow.addStep(Schema.slack.functions.OpenForm,{
-  title: "Create Schedule",
-  interactivity: CreateScheduleWorkflow.inputs.interactivity,
-  submit_label: "Submit",
-  description: "Schedule the Daily update of a channel topic",
-  fields: {
-    required: ["channel_id"],
-    elements: [
-      {
-        name: "channel_id",
-        title: "The Channel to create the schedule for",
-        type: Schema.slack.types.channel_id,
-      },
-    ],
+const formData = CreateScheduleWorkflow.addStep(
+  Schema.slack.functions.OpenForm,
+  {
+    title: "Create Schedule",
+    interactivity: CreateScheduleWorkflow.inputs.interactivity,
+    submit_label: "Submit",
+    description: "Schedule the Daily update of a channel topic",
+    fields: {
+      required: ["channel_id"],
+      elements: [
+        {
+          name: "channel_id",
+          title: "The Channel to create the schedule for",
+          type: Schema.slack.types.channel_id,
+        },
+      ],
+    },
   },
-})
+);
 
 CreateScheduleWorkflow.addStep(
   CreateScheduledTrigger,

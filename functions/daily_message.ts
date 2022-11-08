@@ -4,12 +4,12 @@ import type { GenerateDailyMessage } from "../workflows/common/generate_daily_me
 const generateMessage: SlackFunctionHandler<
   typeof GenerateDailyMessage.definition
 > = async () => {
-  console.log ("About to generate message!");
+  console.log("About to generate message!");
 
   //This can be replaced to fetch the message from where ever necessary
   const message = `Today's date is ${new Date().toDateString()}`;
 
-  console.log (message);
+  console.log(message);
 
   return await {
     outputs: { message },

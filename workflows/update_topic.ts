@@ -10,8 +10,8 @@ export const UpdateTopicWorkflow = DefineWorkflow(
     description: "Update a topic with a daily message",
     input_parameters: {
       properties: {
-          interactivity: {
-            type: Schema.slack.types.interactivity,
+        interactivity: {
+          type: Schema.slack.types.interactivity,
         },
       },
       required: ["interactivity"],
@@ -19,7 +19,7 @@ export const UpdateTopicWorkflow = DefineWorkflow(
   },
 );
 
-const formData = UpdateTopicWorkflow.addStep(Schema.slack.functions.OpenForm,{
+const formData = UpdateTopicWorkflow.addStep(Schema.slack.functions.OpenForm, {
   title: "Update Channel Topic",
   interactivity: UpdateTopicWorkflow.inputs.interactivity,
   submit_label: "Submit",
@@ -34,7 +34,7 @@ const formData = UpdateTopicWorkflow.addStep(Schema.slack.functions.OpenForm,{
       },
     ],
   },
-})
+});
 
 const generateMessageStep = UpdateTopicWorkflow.addStep(
   GenerateDailyMessage,
