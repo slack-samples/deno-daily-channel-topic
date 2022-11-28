@@ -1,5 +1,5 @@
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
-import { GenerateDailyMessage } from "./common/generate_daily_message_definition.ts";
+import { GenerateDailyMessage } from "../functions/daily_message.ts";
 
 export const ReplyToMessageWorkflow = DefineWorkflow(
   {

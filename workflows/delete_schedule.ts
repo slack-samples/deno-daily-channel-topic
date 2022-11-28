@@ -1,19 +1,5 @@
-import { DefineFunction, DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
-
-export const DeleteScheduledTrigger = DefineFunction({
-  title: "Delete the scheduled topic update for a channel",
-  callback_id: "delete_scheduled_trigger",
-  source_file: "functions/delete_scheduled_trigger.ts",
-  input_parameters: {
-    properties: {
-      channel_id: {
-        description: "The id of the channel to delete the trigger for",
-        type: Schema.slack.types.channel_id,
-      },
-    },
-    required: ["channel_id"],
-  },
-});
+import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
+import { DeleteScheduledTrigger } from "../functions/delete_scheduled_trigger.ts";
 
 export const DeleteScheduleWorkflow = DefineWorkflow(
   {

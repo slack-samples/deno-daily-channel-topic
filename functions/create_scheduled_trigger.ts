@@ -1,6 +1,30 @@
 import { SlackAPI } from "deno-slack-api/mod.ts";
+import { DefineFunction, Schema } from "deno-slack-sdk/mod.ts";
 import type { SlackFunctionHandler } from "deno-slack-sdk/types.ts";
-import type { CreateScheduledTrigger } from "../workflows/create_schedule.ts";
+
+export const CreateScheduledTrigger = DefineFunction({
+  title: "Create a scheduled Trigger",
+  callback_id: "create_scheduled_trigger",
+  source_file: "functions/create_scheduled_trigger.ts",
+  input_parameters: {
+    properties: {
+      channel_id: {
+        description: "The id of the Channel to create a schedule for",
+        type: Schema.slack.types.channel_id,
+      },
+    },
+    required: ["channel_id"],
+  },
+  output_parameters: {
+    properties: {
+      trigger_id: {
+        description: "The ID of the trigger created by the Slack API",
+        type: Schema.types.string,
+      },
+    },
+    required: ["trigger_id"],
+  },
+});
 
 const createTrigger: SlackFunctionHandler<
   typeof CreateScheduledTrigger.definition
