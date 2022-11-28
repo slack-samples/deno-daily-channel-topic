@@ -7,11 +7,7 @@ refresh on Platform 2.0, please check out the
 
 ## Use Case and Deployment
 
-
-
 https://user-images.githubusercontent.com/3172461/204366766-e99c8b15-8d7a-4e83-aacc-1588eb3b2d24.mp4
-
-
 
 ## Setup
 
@@ -32,9 +28,9 @@ $ slack deploy
 
 #### Trigger Configuration
 
-Prior to creating your triggers, open `/triggers/message_posted_event.ts`. Update
-the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID" value
-to be the ChannelId of the channel you want your bot to respond in
+Prior to creating your triggers, open `/triggers/message_posted_event.ts`.
+Update the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID"
+value to be the ChannelId of the channel you want your bot to respond in
 
 #### Static Trigger Creation
 
