@@ -7,7 +7,11 @@ refresh on Platform 2.0, please check out the
 
 ## Use Case and Deployment
 
-https://media.slack-github.com/user/2725/files/4e5a968c-380e-40df-8af9-b73ab160e4fe
+
+
+https://user-images.githubusercontent.com/3172461/204366766-e99c8b15-8d7a-4e83-aacc-1588eb3b2d24.mp4
+
+
 
 ## Setup
 
