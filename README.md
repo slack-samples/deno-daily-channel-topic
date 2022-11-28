@@ -1,4 +1,4 @@
-# Daily Topic Bot
+# Deno Daily Topic Bot
 
 This repo is a starter template exemplifying a bot that runs on a schedule to
 update channel topics and replies to user messages in thread. If you need a
@@ -28,7 +28,7 @@ $ slack deploy
 
 #### Trigger Configuration
 
-Prior to creating your triggers, open /triggers/message_posted_event.ts. Update
+Prior to creating your triggers, open `/triggers/message_posted_event.ts`. Update
 the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID" value
 to be the ChannelId of the channel you want your bot to respond in
 
