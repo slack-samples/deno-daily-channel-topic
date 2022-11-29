@@ -1,5 +1,3 @@
-//Manifest.ts defines the functions/workflows to be incorporated in the app as well as other configuration
-
 import { Manifest } from "deno-slack-sdk/mod.ts";
 import { CreateScheduleWorkflow } from "./workflows/create_schedule.ts";
 import { DeleteScheduleWorkflow } from "./workflows/delete_schedule.ts";
