@@ -1,5 +1,5 @@
 // Included as an example. Schedules will be created programmatically
-/*import { Trigger } from "deno-slack-api/types.ts";
+import { Trigger } from "deno-slack-api/types.ts";
 
 const trigger : Trigger = {
       type: "scheduled",
@@ -15,4 +15,4 @@ const trigger : Trigger = {
       }
     }
 
-export default trigger; */
+export default trigger;
