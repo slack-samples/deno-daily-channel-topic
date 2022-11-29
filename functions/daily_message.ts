@@ -1,5 +1,4 @@
-import type { SlackFunctionHandler } from "deno-slack-sdk/types.ts";
-import { DefineFunction, Schema } from "deno-slack-sdk/mod.ts";
+import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
 export const GenerateDailyMessage = DefineFunction({
   title: "Generate Daily Message",
@@ -16,19 +15,18 @@ export const GenerateDailyMessage = DefineFunction({
   },
 });
 
-const generateMessage: SlackFunctionHandler<
-  typeof GenerateDailyMessage.definition
-> = async () => {
-  console.log("About to generate message!");
+export default SlackFunction(
+  GenerateDailyMessage,
+  () => {
+    console.log("About to generate message!");
 
-  //This can be replaced to fetch the message from where ever necessary
-  const message = `Today's date is ${new Date().toDateString()}`;
+    //This can be replaced to fetch the message from where ever necessary
+    const message = `Today's date is ${new Date().toDateString()}`;
 
-  console.log(message);
+    console.log(message);
 
-  return await {
-    outputs: { message },
-  };
-};
-
-export default generateMessage;
+    return {
+      outputs: { message },
+    };
+  },
+);

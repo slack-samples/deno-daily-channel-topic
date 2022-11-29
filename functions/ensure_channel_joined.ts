@@ -1,6 +1,5 @@
 import { SlackAPI } from "deno-slack-api/mod.ts";
-import { DefineFunction, Schema } from "deno-slack-sdk/mod.ts";
-import type { SlackFunctionHandler } from "deno-slack-sdk/types.ts";
+import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
 export const EnsureChannelJoined = DefineFunction({
   title: "Ensure the bot is part of the channel",
@@ -17,20 +16,17 @@ export const EnsureChannelJoined = DefineFunction({
   },
 });
 
-const ensureChannelJoined: SlackFunctionHandler<
-  typeof EnsureChannelJoined.definition
-> = async (
-  { inputs, token },
-) => {
-  const client = SlackAPI(token);
+export default SlackFunction(
+  EnsureChannelJoined,
+  async ({ inputs, token }) => {
+    const client = SlackAPI(token);
 
-  //No negative to running this multiple times for the same channel
-  const ret = await client.conversations.join({ channel: inputs.channel_id });
-  if (!ret.ok) throw new Error(ret.error);
+    //No negative to running this multiple times for the same channel
+    const ret = await client.conversations.join({ channel: inputs.channel_id });
+    if (!ret.ok) throw new Error(ret.error);
 
-  return await {
-    outputs: {},
-  };
-};
-
-export default ensureChannelJoined;
+    return {
+      outputs: {},
+    };
+  },
+);
