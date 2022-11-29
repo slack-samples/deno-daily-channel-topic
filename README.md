@@ -2,7 +2,9 @@
 
 This app contains a sample TypeScript project for use on Slack's
 [next-generation hosted platform](https://api.slack.com/future). The project
-exemplifies a bot that runs on a schedule to update channel topics and replies to user messages in thread. Event Triggers can be dynamically created by the app to allow it to work with new channels
+exemplifies a bot that runs on a schedule to update channel topics and replies
+to user messages in thread. Event Triggers can be dynamically created by the app
+to allow it to work with new channels
 
 **Guide Outline**:
 
@@ -21,11 +23,14 @@ exemplifies a bot that runs on a schedule to update channel topics and replies t
 
 ## Supported Workflows
 
-- **Update Topic**: A manually triggered workflow to demonstrate updating a channel's topic.
-- **Scheduled Update Topic**: An automatically triggered workflow that updates a channel's topic.
+- **Update Topic**: A manually triggered workflow to demonstrate updating a
+  channel's topic.
+- **Scheduled Update Topic**: An automatically triggered workflow that updates a
+  channel's topic.
 - **Create Schedule**: Setup a daily topic update for a channel.
 - **Delete Schedule**: Remove a daily topic update for a channel.
-- **Reply To Message**: A workflow that replies to the first message of a thread in a new channel with the daily message.
+- **Reply To Message**: A workflow that replies to the first message of a thread
+  in a new channel with the daily message.
 
 ## Setup
 
