@@ -4,7 +4,7 @@ import { Manifest } from "deno-slack-sdk/mod.ts";
 import { CreateScheduleWorkflow } from "./workflows/create_schedule.ts";
 import { DeleteScheduleWorkflow } from "./workflows/delete_schedule.ts";
 import { UpdateTopicWorkflow } from "./workflows/update_topic.ts";
-import { ScheduledUpdateTopicWorkflow } from "./workflows/scheduled_topic_update.ts";
+import { ScheduledUpdateTopicWorkflow } from "./workflows/scheduled_update_topic.ts";
 import { ReplyToMessageWorkflow } from "./workflows/reply_to_message.ts";
 
 export default Manifest({
