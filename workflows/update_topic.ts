@@ -1,4 +1,4 @@
-//This Workflow is designed to be triggered by scheduled triggers created under the Create_Schedule workflow
+// This Workflow is designed to be triggered by scheduled triggers created under the Create_Schedule workflow
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
 import { EnsureChannelJoined } from "../functions/ensure_channel_joined.ts";
 import { GenerateDailyMessage } from "../functions/daily_message.ts";
