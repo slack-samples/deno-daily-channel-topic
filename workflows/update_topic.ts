@@ -41,7 +41,7 @@ const generateMessageStep = UpdateTopicWorkflow.addStep(
   {},
 );
 
-//Certain functions, like setting the channel topic require that the bot is part of the channel
+// Certain functions, like setting the channel topic, require that the bot is part of the channel
 UpdateTopicWorkflow.addStep(
   EnsureChannelJoined,
   {

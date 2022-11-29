@@ -4,7 +4,7 @@ const trigger: Trigger = {
   type: "event",
   event: {
     event_type: "slack#/events/message_posted",
-    //Update Channel Id on new installs
+    // Update Channel Id on new installs
     channel_ids: ["REPLACE_WITH_YOUR_CHANNEL_ID"],
     filter: {
       root: {
@@ -12,11 +12,11 @@ const trigger: Trigger = {
         inputs: [{
           operator: "NOT",
           inputs: [{
-            //Filter out posts by apps
+            // Filter out posts by apps
             statement: "{{data.user_id}} == null",
           }],
         }, {
-          //Filter out thread replies
+          // Filter out thread replies
           statement: "{{data.thread_ts}} == null",
         }],
       },
