@@ -1,6 +1,5 @@
 import { SlackAPI } from "deno-slack-api/mod.ts";
-import { DefineFunction, Schema } from "deno-slack-sdk/mod.ts";
-import type { SlackFunctionHandler } from "deno-slack-sdk/types.ts";
+import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
 export const DeleteScheduledTrigger = DefineFunction({
   title: "Delete the scheduled topic update for a channel",
@@ -17,30 +16,45 @@ export const DeleteScheduledTrigger = DefineFunction({
   },
 });
 
-const deleteTrigger: SlackFunctionHandler<
-  typeof DeleteScheduledTrigger.definition
-> = async (
-  { inputs, token },
-) => {
-  console.log(`Deleting trigger ${inputs.channel_id}`);
+export default SlackFunction(
+  DeleteScheduledTrigger,
+  async ({ inputs, token }) => {
+    console.log(`Deleting trigger ${inputs.channel_id}`);
 
-  const client = SlackAPI(token, {});
-  const triggerlist = await client.workflows.triggers.list();
+    const client = SlackAPI(token, {});
+    const triggerlist = await client.workflows.triggers.list();
 
-  console.log(triggerlist.triggers);
+    console.log(triggerlist.triggers);
 
-  const channelTrigger = triggerlist.triggers.find((
-    i: { inputs: { channel_id: { value: string } } },
-  ) => i.inputs?.channel_id?.value == inputs.channel_id);
-  console.log(channelTrigger);
+    if (triggerlist.triggers) {
+      let channelTrigger;
+      try {
+        channelTrigger = triggerlist.triggers.find((
+          // deno-lint-ignore no-explicit-any
+          i: { inputs: { [id: string]: any } },
+        ) => i.inputs?.channel_id?.value == inputs.channel_id);
+        console.log(channelTrigger);
+      } catch (error) {
+        return {
+          error: "Could not filter triggers Error: " + error,
+        };
+      }
 
-  await client.workflows.triggers.delete({
-    trigger_id: channelTrigger.id,
-  });
+      if (channelTrigger) {
+        const resp = await client.workflows.triggers.delete({
+          trigger_id: channelTrigger.id,
+        });
 
-  return await {
-    outputs: {},
-  };
-};
+        if (!resp.ok && resp.error) {
+          return {
+            error: resp.error,
+          };
+        }
+      }
+    }
 
-export default deleteTrigger;
+    return {
+      outputs: {},
+    };
+  },
+);
