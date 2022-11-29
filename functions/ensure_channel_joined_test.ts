@@ -11,7 +11,7 @@ const { createContext } = SlackFunctionTester("joinChannel");
 Deno.test("Join Channel", async (t) => {
   mf.install(); // mock out calls to `fetch`
 
-  //Create test values
+  // Create test values
   const inputs = {
     channel_id: "123",
   };
@@ -22,14 +22,14 @@ Deno.test("Join Channel", async (t) => {
     };
 
     mf.mock("POST@/api/conversations.join", (req: Request) => {
-      assertEquals(req.url, "https://slack.com/api/conversations.join"); //verify request is made
+      assertEquals(req.url, "https://slack.com/api/conversations.join"); // verify request is made
       return new Response(JSON.stringify(apiSuccessResponse));
     });
 
-    //Inject test context
+    // Inject test context
     const { outputs } = await EnsureChannelJoined(createContext({ inputs }));
 
-    //Assert success output
+    // Assert success output
     assertExists(outputs);
   });
 });
