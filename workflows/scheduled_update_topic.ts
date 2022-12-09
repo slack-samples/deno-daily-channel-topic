@@ -1,4 +1,4 @@
-//This Workflow is designed to be triggered by scheduled triggers created under the Create_Schedule workflow
+// This Workflow is designed to be triggered by scheduled triggers created under the Create_Schedule workflow
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
 import { EnsureChannelJoined } from "../functions/ensure_channel_joined.ts";
 import { GenerateDailyMessage } from "../functions/daily_message.ts";
@@ -25,7 +25,7 @@ const generateMessageStep = ScheduledUpdateTopicWorkflow.addStep(
   {},
 );
 
-//Certain functions, like setting the channel topic require that the bot is part of the channel
+// Certain functions, like setting the channel topic require that the bot is part of the channel
 ScheduledUpdateTopicWorkflow.addStep(
   EnsureChannelJoined,
   {

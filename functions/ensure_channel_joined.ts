@@ -21,7 +21,7 @@ export default SlackFunction(
   async ({ inputs, token }) => {
     const client = SlackAPI(token);
 
-    //No negative to running this multiple times for the same channel
+    // No negative to running this multiple times for the same channel
     const ret = await client.conversations.join({ channel: inputs.channel_id });
     if (!ret.ok) throw new Error(ret.error);
 

@@ -51,7 +51,7 @@ Start by cloning this repository:
 
 ```zsh
 # Clone this project onto your machine
-$ slack create my-daily-topic-bot -t slack-samples/deno-daily-topic-boy
+$ slack create my-daily-topic-bot -t slack-samples/deno-daily-channel-topic
 
 # Change into this project directory
 $ cd my-daily-topic-bot
@@ -77,9 +77,9 @@ development version (denoted by `(dev)`), as well as a deployed version.
 
 ### Trigger Configuration
 
-Prior to creating your triggers, open /triggers/message_posted_event.ts. Update
+Prior to creating your triggers, open `/triggers/message_posted_event.ts`. Update
 the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID" value
-to be the ChannelId of the channel you want your bot to respond in
+to be the channel ID of the channel you want your bot to respond in.
 
 ### Static Trigger Creation
 
@@ -88,13 +88,13 @@ workflows. Most are created during installation. You can deploy all of them by
 running
 
 ```zsh
-$ for x in triggers/*.json ; do slack triggers create --trigger-def $x; done
+$ for x in triggers/*.ts ; do slack triggers create --trigger-def $x; done
 ```
 
 or you can do so individually using
 
 ```zsh
-$ slack triggers create --trigger-def triggers/[file_name].json
+$ slack triggers create --trigger-def triggers/[file_name].ts
 ```
 
 ### Dynamic Trigger Creation
@@ -130,8 +130,8 @@ Connected, awaiting events
 
 Once running, click the
 [previously created Shortcut URL](#create-a-link-trigger) associated with the
-`(dev)` version of your app. This should start a Workflow that opens a form used
-to trigger your topic update.
+`(dev)` version of your app. This should start a Workflow that opens a form, which will
+trigger your topic update.
 
 To stop running locally, press `<CTRL> + C` to end the process.
 

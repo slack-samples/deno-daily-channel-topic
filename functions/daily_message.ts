@@ -20,7 +20,7 @@ export default SlackFunction(
   () => {
     console.log("About to generate message!");
 
-    //This can be replaced to fetch the message from where ever necessary
+    // This can be replaced to fetch the message from where ever necessary
     const message = `Today's date is ${new Date().toDateString()}`;
 
     console.log(message);
