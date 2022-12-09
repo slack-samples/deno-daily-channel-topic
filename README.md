@@ -14,6 +14,7 @@ to allow it to work with new channels
   - [Clone the Sample App](#clone-the-sample-app)
 - [Create a Link Trigger](#create-a-link-trigger)
 - [Running Your Project Locally](#running-your-project-locally)
+- [Testing](#testing)
 - [Deploying Your App](#deploying-your-app)
   - [Viewing Activity Logs](#viewing-activity-logs)
 - [Project Structure](#project-structure)
@@ -134,6 +135,18 @@ Once running, click the
 which will trigger your topic update.
 
 To stop running locally, press `<CTRL> + C` to end the process.
+
+## Testing
+
+For an example of how to test a function, see
+`functions/sample_function_test.ts`. Test filenames should be suffixed with
+`_test`.
+
+Run all tests with `deno test`:
+
+```zsh
+$ deno test
+```
 
 ## Deploying Your App
 
