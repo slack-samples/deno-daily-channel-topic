@@ -77,9 +77,9 @@ development version (denoted by `(dev)`), as well as a deployed version.
 
 ### Trigger Configuration
 
-Prior to creating your triggers, open `/triggers/message_posted_event.ts`. Update
-the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID" value
-to be the channel ID of the channel you want your bot to respond in.
+Prior to creating your triggers, open `/triggers/message_posted_event.ts`.
+Update the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID"
+value to be the channel ID of the channel you want your bot to respond in.
 
 ### Static Trigger Creation
 
@@ -130,8 +130,8 @@ Connected, awaiting events
 
 Once running, click the
 [previously created Shortcut URL](#create-a-link-trigger) associated with the
-`(dev)` version of your app. This should start a Workflow that opens a form, which will
-trigger your topic update.
+`(dev)` version of your app. This should start a Workflow that opens a form,
+which will trigger your topic update.
 
 To stop running locally, press `<CTRL> + C` to end the process.
 
