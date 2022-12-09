@@ -139,7 +139,7 @@ To stop running locally, press `<CTRL> + C` to end the process.
 ## Testing
 
 For an example of how to test a function, see
-`functions/sample_function_test.ts`. Test filenames should be suffixed with
+`functions/daily_message_test.ts`. Test filenames should be suffixed with
 `_test`.
 
 Run all tests with `deno test`:
