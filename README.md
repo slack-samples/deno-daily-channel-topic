@@ -1,16 +1,23 @@
-# Deno Starter Template
+# Run-on-Slack Deno Daily Topic Bot
 
-This is a scaffolded Deno template used to build out Slack apps using the Slack
-CLI.
+This app contains a sample TypeScript project for use on Slack's
+[next-generation hosted platform](https://api.slack.com/future). The sample
+features a bot that runs on a schedule to update channel topics and replies to
+user messages in thread. Event triggers can be dynamically created by the app to
+allow it to work with new channels.
 
 **Guide Outline**:
 
+- [Supported Workflows](#supported-workflows)
 - [Setup](#setup)
   - [Install the Slack CLI](#install-the-slack-cli)
-  - [Clone the Template](#clone-the-template)
-- [Create a Link Trigger](#create-a-link-trigger)
+  - [Clone the Sample App](#clone-the-sample-app)
+- [Create a Trigger](#create-a-trigger)
+  - [Trigger Configuration](#trigger-configuration)
+  - [Static Trigger Creation](#static-trigger-creation)
+  - [Dynamic Trigger Creation](#dynamic-trigger-creation)
+  - [Trigger Setup Demonstration](#trigger-setup-demonstration)
 - [Running Your Project Locally](#running-your-project-locally)
-- [Datastores](#datastores)
 - [Testing](#testing)
 - [Deploying Your App](#deploying-your-app)
   - [Viewing Activity Logs](#viewing-activity-logs)
@@ -18,6 +25,17 @@ CLI.
 - [Resources](#resources)
 
 ---
+
+## Supported Workflows
+
+- **Update Topic**: A manually triggered workflow to demonstrate updating a
+  channel's topic.
+- **Scheduled Update Topic**: An automatically triggered workflow that updates a
+  channel's topic.
+- **Create Schedule**: Set up a daily topic update for a channel.
+- **Delete Schedule**: Remove a daily topic update for a channel.
+- **Reply To Message**: A workflow that replies to the first message of a thread
+  in a new channel with the daily message.
 
 ## Setup
 
@@ -28,54 +46,83 @@ requires any of [the Slack paid plans](https://slack.com/pricing).
 
 ### Install the Slack CLI
 
-To use this template, you first need to install and configure the Slack CLI.
+To use this sample, you first need to install and configure the Slack CLI.
 Step-by-step instructions can be found in our
 [Quickstart Guide](https://api.slack.com/future/quickstart).
 
-### Clone the Template
+### Clone the Sample App
 
 Start by cloning this repository:
 
 ```zsh
 # Clone this project onto your machine
-$ slack create my-app -t slack-samples/deno-starter-template
+$ slack create my-daily-topic-bot -t slack-samples/deno-daily-channel-topic
 
 # Change into this project directory
-$ cd my-app
+$ cd my-daily-topic-bot
 ```
 
-## Create a Link Trigger
+## Create a Trigger
 
-[Triggers](https://api.slack.com/future/triggers) are what cause Workflows to
-run. These Triggers can be invoked by a user, or automatically as a response to
+[Triggers](https://api.slack.com/future/triggers) are what cause workflows to
+run. These triggers can be invoked by a user, or automatically as a response to
 an event within Slack.
 
-A [Link Trigger](https://api.slack.com/future/triggers/link) is a type of
-Trigger that generates a **Shortcut URL** which, when posted in a channel or
-added as a bookmark, becomes a link. When clicked, the Link Trigger will run the
-associated Workflow.
+This application uses
+[event triggers](https://api.slack.com/future/triggers/event), which activate
+when a specific event occurs, and link triggers. A
+[link trigger](https://api.slack.com/future/triggers/link) is a type of trigger
+that generates a **Shortcut URL** which, when posted in a channel or added as a
+bookmark, becomes a link. When clicked, the link trigger will run the associated
+workflow.
 
-Link Triggers are _unique to each installed version of your app_. This means
+Link triggers are _unique to each installed version of your app_. This means
 that Shortcut URLs will be different across each workspace, as well as between
 [locally run](#running-your-project-locally) and
-[deployed apps](#deploying-your-app). When creating a Trigger, you must select
-the Workspace that you'd like to create the Trigger in. Each Workspace has a
+[deployed apps](#deploying-your-app). When creating a trigger, you must select
+the Workspace that you'd like to create the trigger in. Each workspace has a
 development version (denoted by `(dev)`), as well as a deployed version.
 
-To create a Link Trigger for the Workflow in this template, run the following
-command:
+### Trigger Configuration
+
+Prior to creating your triggers, open `/triggers/message_posted_event.ts`.
+Update the `channel_ids` property and overwrite the
+"REPLACE_WITH_YOUR_CHANNEL_ID" value to be the channel ID of the channel you
+want your bot to respond in.
+
+### Static Trigger Creation
+
+You will need to create the triggers that will act as entrypoints into your
+workflows. Most are created during installation. You can deploy all of them by
+running:
 
 ```zsh
-$ slack trigger create --trigger-def triggers/sample_trigger.ts
+$ for x in triggers/*.ts ; do slack triggers create --trigger-def $x; done
 ```
 
-After selecting a Workspace, the output provided will include the Link Trigger
-Shortcut URL. Copy and paste this URL into a channel as a message, or add it as
-a bookmark in a channel of the Workspace you selected.
+You can also create each trigger individually by running:
 
-**Note: this link won't run the Workflow until the app is either running locally
+```zsh
+$ slack triggers create --trigger-def triggers/[file_name].ts
+```
+
+### Dynamic Trigger Creation
+
+Daily Topic Bot allows you to create daily schedules for any channel in your
+workspace. After you've created your static triggers, be sure to run the "Create
+a schedule" trigger for any channels you'd like to see updated.
+
+To run the trigger, copy and paste the Shortcut URL from the trigger creation
+output into a channel as a message, or add it as a bookmark in a channel of the
+Workspace you selected.
+
+**Note: this link won't run the workflow until the app is either running locally
 or deployed!** Read on to learn how to run your app locally and eventually
 deploy it to Slack hosting.
+
+### Trigger Setup Demonstration
+
+https://user-images.githubusercontent.com/3172461/204366766-e99c8b15-8d7a-4e83-aacc-1588eb3b2d24.mp4
 
 ## Running Your Project Locally
 
@@ -92,22 +139,15 @@ Connected, awaiting events
 
 Once running, click the
 [previously created Shortcut URL](#create-a-link-trigger) associated with the
-`(dev)` version of your app. This should start the included sample Workflow.
+`(dev)` version of your app. This should start a workflow that opens a form,
+which will trigger your topic update.
 
 To stop running locally, press `<CTRL> + C` to end the process.
 
-## Datastores
-
-If your app needs to store any data, a datastore would be the right place for
-that. For an example of a datastore, see `datastores/sample_datastore.ts`. Using
-a datastore also requires the `datastore:write`/`datastore:read` scopes to be
-present in your manifest.
-
 ## Testing
 
-For an example of how to test a function, see
-`functions/sample_function_test.ts`. Test filenames should be suffixed with
-`_test`.
+For an example of how to test a function, see `functions/daily_message_test.ts`.
+Test filenames should be suffixed with `_test`.
 
 Run all tests with `deno test`:
 
@@ -124,9 +164,9 @@ app to Slack hosting using `slack deploy`:
 $ slack deploy
 ```
 
-After deploying, [create a new Link Trigger](#create-a-link-trigger) for the
-production version of your app (not appended with `(dev)`). Once the Trigger is
-invoked, the Workflow should run just as it did in when developing locally.
+After deploying, [create a new link trigger](#create-a-link-trigger) for the
+production version of your app (not appended with `(dev)`). Once the trigger is
+invoked, the workflow should run just as it did in when developing locally.
 
 ### Viewing Activity Logs
 
@@ -153,12 +193,12 @@ script hooks that are executed by the CLI and implemented by the SDK.
 
 [Functions](https://api.slack.com/future/functions) are reusable building blocks
 of automation that accept inputs, perform calculations, and provide outputs.
-Functions can be used independently or as steps in Workflows.
+Functions can be used independently or as steps in workflows.
 
 ### `/workflows`
 
-A [Workflow](https://api.slack.com/future/workflows) is a set of steps that are
-executed in order. Each step in a Workflow is a function.
+A [workflow](https://api.slack.com/future/workflows) is a set of steps that are
+executed in order. Each step in a workflow is a function.
 
 Workflows can be configured to run without user input or they can collect input
 by beginning with a [form](https://api.slack.com/future/forms) before continuing
@@ -166,15 +206,9 @@ to the next step.
 
 ### `/triggers`
 
-[Triggers](https://api.slack.com/future/triggers) determine when Workflows are
+[Triggers](https://api.slack.com/future/triggers) determine when workflows are
 executed. A trigger file describes a scenario in which a workflow should be run,
 such as a user pressing a button or when a specific event occurs.
-
-### `/datastores`
-
-[Datastores](https://api.slack.com/future/datastores) can securely store and
-retrieve data for your application. Required scopes to use datastores include
-`datastore:write` and `datastore:read`.
 
 ## Resources
 

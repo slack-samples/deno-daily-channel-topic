@@ -1,24 +1,34 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
-import SampleWorkflow from "./workflows/sample_workflow.ts";
-import SampleObjectDatastore from "./datastores/sample_datastore.ts";
+import { CreateScheduleWorkflow } from "./workflows/create_schedule.ts";
+import { DeleteScheduleWorkflow } from "./workflows/delete_schedule.ts";
+import { UpdateTopicWorkflow } from "./workflows/update_topic.ts";
+import { ScheduledUpdateTopicWorkflow } from "./workflows/scheduled_update_topic.ts";
+import { ReplyToMessageWorkflow } from "./workflows/reply_to_message.ts";
 
-/**
- * The app manifest contains the app's configuration. This
- * file defines attributes like app name and description.
- * https://api.slack.com/future/manifest
- */
 export default Manifest({
-  name: "deno-starter-template",
-  description: "A template for building Slack apps with Deno",
-  icon: "assets/icon.png",
-  workflows: [SampleWorkflow],
+  name: "daily-topic-bot",
+  description: "A starter template.",
+  icon: "assets/icon.jpg",
+  workflows: [
+    UpdateTopicWorkflow,
+    ScheduledUpdateTopicWorkflow,
+    CreateScheduleWorkflow,
+    DeleteScheduleWorkflow,
+    ReplyToMessageWorkflow,
+  ],
   outgoingDomains: [],
-  datastores: [SampleObjectDatastore],
   botScopes: [
     "commands",
+    "channels:join",
+    "channels:manage",
+    "channels:history",
+    "groups:write",
+    "im:write",
+    "im:history",
+    "mpim:write",
     "chat:write",
     "chat:write.public",
-    "datastore:read",
-    "datastore:write",
+    "triggers:write",
+    "triggers:read",
   ],
 });
