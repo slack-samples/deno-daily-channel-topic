@@ -12,7 +12,11 @@ allow it to work with new channels.
 - [Setup](#setup)
   - [Install the Slack CLI](#install-the-slack-cli)
   - [Clone the Sample App](#clone-the-sample-app)
-- [Create a Link Trigger](#create-a-link-trigger)
+- [Create a Trigger](#create-a-trigger)
+  - [Trigger Configuration](#trigger-configuration)
+  - [Static Trigger Creation](#static-trigger-creation)
+  - [Dynamic Trigger Creation](#dynamic-trigger-creation)
+  - [Trigger Setup Demonstration](#trigger-setup-demonstration)
 - [Running Your Project Locally](#running-your-project-locally)
 - [Testing](#testing)
 - [Deploying Your App](#deploying-your-app)
@@ -58,16 +62,19 @@ $ slack create my-daily-topic-bot -t slack-samples/deno-daily-channel-topic
 $ cd my-daily-topic-bot
 ```
 
-## Create a Link Trigger
+## Create a Trigger
 
 [Triggers](https://api.slack.com/future/triggers) are what cause workflows to
 run. These triggers can be invoked by a user, or automatically as a response to
 an event within Slack.
 
-A [link trigger](https://api.slack.com/future/triggers/link) is a type of
-trigger that generates a **Shortcut URL** which, when posted in a channel or
-added as a bookmark, becomes a link. When clicked, the link trigger will run the
-associated workflow.
+This application uses
+[event triggers](https://api.slack.com/future/triggers/event), which activate
+when a specific event occurs, and link triggers. A
+[link trigger](https://api.slack.com/future/triggers/link) is a type of trigger
+that generates a **Shortcut URL** which, when posted in a channel or added as a
+bookmark, becomes a link. When clicked, the link trigger will run the associated
+workflow.
 
 Link triggers are _unique to each installed version of your app_. This means
 that Shortcut URLs will be different across each workspace, as well as between
@@ -79,20 +86,21 @@ development version (denoted by `(dev)`), as well as a deployed version.
 ### Trigger Configuration
 
 Prior to creating your triggers, open `/triggers/message_posted_event.ts`.
-Update the Channel_ids property and overwrite the "REPLACE_WITH_YOUR_CHANNEL_ID"
-value to be the channel ID of the channel you want your bot to respond in.
+Update the `channel_ids` property and overwrite the
+"REPLACE_WITH_YOUR_CHANNEL_ID" value to be the channel ID of the channel you
+want your bot to respond in.
 
 ### Static Trigger Creation
 
 You will need to create the triggers that will act as entrypoints into your
 workflows. Most are created during installation. You can deploy all of them by
-running
+running:
 
 ```zsh
 $ for x in triggers/*.ts ; do slack triggers create --trigger-def $x; done
 ```
 
-or you can do so individually using
+You can also create each trigger individually by running:
 
 ```zsh
 $ slack triggers create --trigger-def triggers/[file_name].ts
@@ -101,18 +109,18 @@ $ slack triggers create --trigger-def triggers/[file_name].ts
 ### Dynamic Trigger Creation
 
 Daily Topic Bot allows you to create daily schedules for any channel in your
-workspace. After you've created your static triggers, be sure to run the Create
-a schedule trigger for any channels you'd like to see updated
+workspace. After you've created your static triggers, be sure to run the "Create
+a schedule" trigger for any channels you'd like to see updated.
 
-After selecting a Workspace, the output provided will include the link trigger
-Shortcut URL. Copy and paste this URL into a channel as a message, or add it as
-a bookmark in a channel of the Workspace you selected.
+To run the trigger, copy and paste the Shortcut URL from the trigger creation
+output into a channel as a message, or add it as a bookmark in a channel of the
+Workspace you selected.
 
 **Note: this link won't run the workflow until the app is either running locally
 or deployed!** Read on to learn how to run your app locally and eventually
 deploy it to Slack hosting.
 
-### Trigger Setup Demonstration:
+### Trigger Setup Demonstration
 
 https://user-images.githubusercontent.com/3172461/204366766-e99c8b15-8d7a-4e83-aacc-1588eb3b2d24.mp4
 
