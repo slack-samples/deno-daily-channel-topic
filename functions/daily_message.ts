@@ -18,12 +18,10 @@ export const GenerateDailyMessage = DefineFunction({
 export default SlackFunction(
   GenerateDailyMessage,
   () => {
-    console.log("About to generate message!");
-
     // This can be replaced to fetch the message from where ever necessary
     const message = `Today's date is ${new Date().toDateString()}`;
 
-    console.log(message);
+    console.log(`Generated new daily message: ${message}`);
 
     return {
       outputs: { message },

@@ -29,7 +29,7 @@ const formData = DeleteScheduleWorkflow.addStep(
       elements: [
         {
           name: "channel_id",
-          title: "The Channel to create the schedule for",
+          title: "The Channel to delete the scheduled topic for",
           type: Schema.slack.types.channel_id,
         },
       ],

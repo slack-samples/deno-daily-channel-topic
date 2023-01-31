@@ -1,4 +1,4 @@
-// This Workflow is designed to be triggered by scheduled triggers created under the Create_Schedule workflow
+// This workflow, which updates a given channel topic, is primarily designed to be triggered by a scheduled trigger (an example implementation of this triggers/daily_schedule.txt). This application also offers a manual trigger option to update the channel topic through a link trigger (triggers/update_topic_shortcut.ts).
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
 import { EnsureChannelJoined } from "../functions/ensure_channel_joined.ts";
 import { GenerateDailyMessage } from "../functions/daily_message.ts";

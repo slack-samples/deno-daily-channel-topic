@@ -2,7 +2,7 @@ import { SlackAPI } from "deno-slack-api/mod.ts";
 import { DefineFunction, Schema, SlackFunction } from "deno-slack-sdk/mod.ts";
 
 export const CreateScheduledTrigger = DefineFunction({
-  title: "Create a scheduled Trigger",
+  title: "Create a scheduled trigger",
   callback_id: "create_scheduled_trigger",
   source_file: "functions/create_scheduled_trigger.ts",
   input_parameters: {
@@ -28,14 +28,14 @@ export const CreateScheduledTrigger = DefineFunction({
 export default SlackFunction(
   CreateScheduledTrigger,
   async ({ inputs, token }) => {
-    console.log(`Creating trigger`);
+    console.log(`Creating scheduled trigger to update daily topic`);
 
     const client = SlackAPI(token, {});
     const scheduleDate = new Date();
     // Start schedule 1 minute in the future. Start_time must always be in the future.
     scheduleDate.setMinutes(scheduleDate.getMinutes() + 1);
 
-    // ./triggers/daily_schedule.txt has a json example of the payload
+    // triggers/sample_scheduled_update_topic.txt has a JSON example of the payload
     const scheduledTrigger = await client.workflows.triggers.create({
       name: `Channel ${inputs.channel_id} Schedule`,
       workflow: "#/workflows/scheduled_update_topic",
@@ -52,13 +52,13 @@ export default SlackFunction(
       },
     });
 
-    console.log(scheduledTrigger);
-
     if (!scheduledTrigger.trigger) {
       return {
         error: "Trigger could not be created",
       };
     }
+
+    console.log("scheduledTrigger has been created");
 
     return {
       outputs: { trigger_id: scheduledTrigger.trigger.id },
