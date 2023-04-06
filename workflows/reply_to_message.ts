@@ -8,6 +8,10 @@ export const ReplyToMessageWorkflow = DefineWorkflow(
     description: "Reply with today's message",
     input_parameters: {
       properties: {
+        // TODO: this workflow is intended to be triggered by triggers/message_posted_event
+        // this trigger currently does not support providing in a message_context object.
+        // however, in the future it will. when that support lands, we should change these properties
+        // to be a single message_context property and type, passed in from the above trigger.
         message_ts: {
           description: "The message to respond to",
           type: Schema.types.string,
@@ -28,10 +32,12 @@ const generateMessageStep = ReplyToMessageWorkflow.addStep(
 );
 
 ReplyToMessageWorkflow.addStep(
-  Schema.slack.functions.SendMessage,
+  Schema.slack.functions.ReplyInThread,
   {
-    channel_id: ReplyToMessageWorkflow.inputs.channel_id,
-    thread_ts: ReplyToMessageWorkflow.inputs.message_ts,
+    message_context: {
+      channel_id: ReplyToMessageWorkflow.inputs.channel_id,
+      message_ts: ReplyToMessageWorkflow.inputs.message_ts,
+    },
     message:
       `This message was replied to by the Bot. ${generateMessageStep.outputs.message}`,
   },

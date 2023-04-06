@@ -1,6 +1,6 @@
 // Included as an example of what a scheduled trigger would look like in a JSON format.
 // Scheduled trigger will be created programmatically in functions/create_scheduled_trigger.ts
-import { Trigger } from "deno-slack-api/types.ts";
+import { Trigger } from "deno-slack-sdk/types.ts";
 
 const trigger: Trigger = {
   type: "scheduled",
