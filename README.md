@@ -10,6 +10,7 @@ to work with new channels.
 - [Setup](#setup)
   - [Install the Slack CLI](#install-the-slack-cli)
   - [Clone the Template](#clone-the-template)
+  - [Trigger Configuration](#trigger-configuration)
 - [Running Your Project Locally](#running-your-project-locally)
 - [Creating Triggers](#creating-triggers)
 - [Datastores](#datastores)
@@ -113,6 +114,12 @@ Interacting with this link will run the associated workflow.
 
 **Note: triggers won't run the workflow unless the app is either running locally
 or deployed!**
+
+### Dynamic Trigger Creation
+
+This sample allows you to create daily schedules for any channel in your
+workspace. After you've created each available trigger, run the "Create a
+schedule" workflow for any channels you'd like to see updated.
 
 ### Manual Trigger Creation
 
