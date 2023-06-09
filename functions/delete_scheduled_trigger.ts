@@ -22,14 +22,14 @@ export default SlackFunction(
     console.log(`Deleting trigger ${inputs.channel_id}`);
 
     const client = SlackAPI(token, {});
-    const triggerlist = await client.workflows.triggers.list();
+    const triggerList = await client.workflows.triggers.list();
 
-    console.log(triggerlist.triggers);
+    console.log(triggerList.triggers);
 
-    if (triggerlist.triggers) {
+    if (triggerList.triggers) {
       let channelTrigger;
       try {
-        channelTrigger = triggerlist.triggers.find((
+        channelTrigger = triggerList.triggers.find((
           // deno-lint-ignore no-explicit-any
           i: { inputs: { [id: string]: any } },
         ) => i.inputs?.channel_id?.value == inputs.channel_id);
