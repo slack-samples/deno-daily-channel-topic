@@ -8,10 +8,6 @@ export const ReplyToMessageWorkflow = DefineWorkflow(
     description: "Reply with today's message",
     input_parameters: {
       properties: {
-        // TODO: this workflow is intended to be triggered by triggers/message_posted_event
-        // this trigger currently does not support providing in a message_context object.
-        // however, in the future it will. when that support lands, we should change these properties
-        // to be a single message_context property and type, passed in from the above trigger.
         message_ts: {
           description: "The message to respond to",
           type: Schema.types.string,

@@ -32,9 +32,6 @@ const trigger: Trigger<typeof ReplyToMessageWorkflow.definition> = {
   name: "Reply to the posted message",
   workflow: `#/workflows/${ReplyToMessageWorkflow.definition.callback_id}`,
   inputs: {
-    // TODO: message_posted event triggers currently do not support providing a message_context data object.
-    // however, in the future it will. when that support lands, we should change these properties
-    // to be a single message_context property and type, provided by {{data.message_context}}.
     message_ts: {
       value: TriggerContextData.Event.MessagePosted.message_ts,
     },

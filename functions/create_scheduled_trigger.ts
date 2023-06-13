@@ -35,7 +35,7 @@ export default SlackFunction(
     // Start schedule 1 minute in the future. Start_time must always be in the future.
     scheduleDate.setMinutes(scheduleDate.getMinutes() + 1);
 
-    // triggers/sample_scheduled_update_topic.txt has a JSON example of the payload
+    // triggers/sample_scheduled_update_topic.ts has a JSON example of the payload
     const scheduledTrigger = await client.workflows.triggers.create({
       name: `Channel ${inputs.channel_id} Schedule`,
       workflow: "#/workflows/scheduled_update_topic",
