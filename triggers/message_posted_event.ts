@@ -11,7 +11,8 @@ const trigger: Trigger<typeof ReplyToMessageWorkflow.definition> = {
   event: {
     event_type: TriggerEventTypes.MessagePosted,
     // Update Channel Id on new installs
-    channel_ids: ["REPLACE_WITH_YOUR_CHANNEL_ID"],
+    // channel_ids: ["REPLACE_WITH_YOUR_CHANNEL_ID"],
+    all_resources: true,
     filter: {
       root: {
         operator: "AND",

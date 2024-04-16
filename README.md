@@ -62,6 +62,8 @@ $ cd my-app
 
 Open `/triggers/message_posted_event.ts` and update the `channel_ids` value to
 be the channel ID of the channel you'd like your app to respond in.
+Alternatively, you can uncomment the `all_resources` property to have the app
+respond in _all_ channels.
 
 ## Running Your Project Locally
 
