@@ -1,3 +1,7 @@
+### ⚠️ This sample has been archived and is no longer maintained.
+
+---
+
 # Daily Channel Topic
 
 This automation features scheduling updates of channel topics and replies to
